@@ -3,16 +3,16 @@ const unirest = require('unirest');
 
 
 var config = {
-    "org": "<org>",
-    "id": "<device id>",
-    "type": "<device type>",
+    "org": "r3lj82",
+    "id": "1C69C",
+    "type": "BluemixUserGroup",
     "auth-method": "token",
-    "auth-token": "<device token>"
+    "auth-token": "kAb!2EFIkTe4cZwfkC"
 };
 
-var configFile = JSON.parse(fs.readFileSync('./1C69C.json')).config
+//var configFile = JSON.parse(fs.readFileSync('./1C69C.json')).config
 
-var finalConfig = configFile
+var finalConfig = config
 
 
 function SigfoxService(rawLog, logger) {
@@ -76,7 +76,9 @@ const postMessageToDevice = (value, config, res) => {
     device.on("connect", function () {
         var msg = JSON.stringify(value)
         //publishing event using the default quality of service
-        device.publish("status", "json", msg);
+        console.log("Message pushed from device " + value.device) 
+	
+	device.publish("status", "json", msg);
 
         device.disconnect();
 
